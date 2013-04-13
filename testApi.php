@@ -1,9 +1,10 @@
 <?php
-$user = $_GET['user'];
+$user = "metatrone74";
 // User
 //	$jsonData = file_get_contents("http://api.justin.tv/api/user/show/$user.json", 0, null, null);
 // Channel
 $jsonData = file_get_contents("http://api.justin.tv/api/channel/show/$user.json", 0, null, null);
+
 $dataArray = json_decode($jsonData, true);
 
 if ($dataArray['producer'] == 'true') {
