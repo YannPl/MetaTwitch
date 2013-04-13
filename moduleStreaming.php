@@ -12,6 +12,7 @@
 *******************************************************/
 $LIST_STREAMS = array("the_kabal", "sucettalanis");
 $MAIN_STREAM = "metatrone74";
+$URL_IMG_OFFLINE = "http://example.fr/img.png";
 
 /*******************************************************
  ******************* GLOBALS ***************************
@@ -42,21 +43,9 @@ if(!displayMainStreamIfEnabled()){
 		}
 	}
 
-	$LIST_STREAMS[] = $MAIN_STREAM;
-	$i = 0;
-	// If no streams are online, just display the players:
-	foreach($LIST_STREAMS as $streamName){
-		$i++;
-		if($i == 2){
-			$i = 0;
-			echo $LIST_RESULT[$streamName]['embed_code']."<br/>";
-		}
-		else{
-			echo $LIST_RESULT[$streamName]['embed_code'];
-		}
-
+	if(!$streamOnline){
+		echo '<img src="'.$URL_IMG_OFFLINE.'" alt="Stream offline" title="Stream Offline"/>';
 	}
-
 }
 
 
