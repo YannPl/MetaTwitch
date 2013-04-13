@@ -33,7 +33,7 @@ if(!displayMainStreamIfEnabled()){
 	foreach($LIST_STREAMS as $streamName){
 		// If no stream displayed yet AND this one is online, display
 		if(!$streamOnline && isOnline($streamName)){
-			echo $LIST_RESULT[$streamName]['embed_code'];
+			echo file_get_contents("http://api.justin.tv/api/channel/embed/$streamName");
 			$streamOnline = true;
 		}
 		// If one stream is already displayed and this one is online too
@@ -62,7 +62,7 @@ function displayMainStreamIfEnabled(){
 	global $LIST_STREAMS, $LIST_RESULT, $MAIN_STREAM;
 
 	if(isOnline($MAIN_STREAM)){
-		echo $LIST_RESULT[$MAIN_STREAM]['embed_code'];
+		echo file_get_contents("http://api.justin.tv/api/channel/embed/$MAIN_STREAM");
 		return true;
 	}
 	else{
@@ -81,7 +81,7 @@ function isOnline($streamName){
 	if(!isset($LIST_RESULT[$streamName])){
 		getStreamDetail($streamName);
 	}
-	return ($LIST_RESULT[$streamName]['producer'] == 'true');
+	return !empty($LIST_RESULT[$streamName]);
 }
 
 /**
@@ -90,6 +90,6 @@ function isOnline($streamName){
  */
 function getStreamDetail($streamName){
 	global $LIST_RESULT;
-	$LIST_RESULT[$streamName] = json_decode(file_get_contents("http://api.justin.tv/api/channel/show/$streamName.json", 0, null, null), true);
+	$LIST_RESULT[$streamName] = json_decode(file_get_contents("http://api.justin.tv/api/stream/list.json?channel=$streamName", 0, null, null), true);
 }
 ?>
