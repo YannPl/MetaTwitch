@@ -23,29 +23,28 @@ $LIST_RESULT = array();
  ******************* MAIN ALGORITHM ********************
 *******************************************************/
 
+$streamOnline = false;
 // Here the mainStream is displayed if needed. Else, let's load the others!
-if(!displayMainStreamIfEnabled()){
-	global $LIST_STREAMS, $LIST_RESULT;
-	// Indicates wether there are at least one stream online
-	$streamOnline = false;
+if(displayMainStreamIfEnabled()){
+	$streamOnline = true;
+}
 
-	// Loop over all streams to display the first one which is online
-	foreach($LIST_STREAMS as $streamName){
-		// If no stream displayed yet AND this one is online, display
-		if(!$streamOnline && isOnline($streamName)){
-			echo file_get_contents("http://api.justin.tv/api/channel/embed/$streamName");
-			$streamOnline = true;
-		}
-		// If one stream is already displayed and this one is online too
-		// Display a link
-		else if(isOnline($streamName)){
-			echo '<br/><a href="http://www.twitch.tv/'.$streamName.'" title="'.$streamName.'" class="link_stream">'.$streamName.' est en ligne aussi!</a>';
-		}
+// Loop over all streams to display the first one which is online
+foreach($LIST_STREAMS as $streamName){
+	// If no stream displayed yet AND this one is online, display
+	if(!$streamOnline && isOnline($streamName)){
+		echo str_replace("auto_play=false", "auto_play=true", file_get_contents("http://api.justin.tv/api/channel/embed/$streamName?width=550&height=378"));
+		$streamOnline = true;
 	}
+	// If one stream is already displayed and this one is online too
+	// Display a link
+	else if(isOnline($streamName)){
+		echo '<br/><a href="http://www.twitch.tv/'.$streamName.'" title="'.$streamName.'" class="link_stream">'.$streamName.' est en ligne aussi!</a>';
+	}
+}
 
-	if(!$streamOnline){
-		echo '<img src="'.$URL_IMG_OFFLINE.'" alt="Stream offline" title="Stream Offline"/>';
-	}
+if(!$streamOnline){
+	echo '<img src="'.$URL_IMG_OFFLINE.'" alt="Stream offline" title="Stream Offline"/>';
 }
 
 
