@@ -13,11 +13,13 @@
 $LIST_STREAMS = array("the_kabal", "sucettalanis");
 $MAIN_STREAM = "metatrone74";
 $URL_IMG_OFFLINE = "http://example.fr/img.png";
+$WIDTH = 550; $HEIGHT = 378;
+$AUTO_PLAY = "true";
 
 /*******************************************************
  ******************* GLOBALS ***************************
 *******************************************************/
-$LIST_RESULT = array();
+$LIST_RESULT = array(); // Pas touche à ça Zae! ;)
 
 /*******************************************************
  ******************* MAIN ALGORITHM ********************
@@ -33,7 +35,7 @@ if(displayMainStreamIfEnabled()){
 foreach($LIST_STREAMS as $streamName){
 	// If no stream displayed yet AND this one is online, display
 	if(!$streamOnline && isOnline($streamName)){
-		echo str_replace("auto_play=false", "auto_play=true", file_get_contents("http://api.justin.tv/api/channel/embed/$streamName?width=550&height=378"));
+		echo str_replace("auto_play=false", "auto_play=$AUTO_PLAY", file_get_contents("http://api.justin.tv/api/channel/embed/$streamName?width=$WIDTH&height=$HEIGHT"));
 		$streamOnline = true;
 	}
 	// If one stream is already displayed and this one is online too
