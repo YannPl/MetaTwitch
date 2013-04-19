@@ -35,7 +35,10 @@ if(displayMainStreamIfEnabled()){
 foreach($LIST_STREAMS as $streamName){
 	// If no stream displayed yet AND this one is online, display
 	if(!$streamOnline && isOnline($streamName)){
-		echo str_replace("auto_play=false", "auto_play=$AUTO_PLAY", file_get_contents("http://api.justin.tv/api/channel/embed/$streamName?width=$WIDTH&height=$HEIGHT"));
+		echo str_replace('height="xxx"','height="'.$HEIGHT.'"',
+			 str_replace('width="xxx"','width="'.$WIDTH.'"',
+			 str_replace("auto_play=false", "auto_play=$AUTO_PLAY", 
+			 file_get_contents("http://api.justin.tv/api/channel/embed/$streamName?width=xxx&height=xxx"))));
 		$streamOnline = true;
 	}
 	// If one stream is already displayed and this one is online too
