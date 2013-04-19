@@ -12,8 +12,8 @@
 *******************************************************/
 $LIST_STREAMS = array("the_kabal", "sucettalanis");
 $MAIN_STREAM = "metatrone74";
-$URL_IMG_OFFLINE = "http://example.fr/img.png";
-$WIDTH = 550; $HEIGHT = 378;
+$URL_IMG_OFFLINE = "/images/Metatrone/Guilde/offline60s.png";
+$WIDTH = "100%"; $HEIGHT = "100%";
 $AUTO_PLAY = "true";
 
 /*******************************************************
