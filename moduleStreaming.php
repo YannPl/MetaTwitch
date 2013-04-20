@@ -79,7 +79,7 @@ function displayStream($streamName){
 	global $HEIGHT, $WIDTH, $AUTO_PLAY;
 	$search = array('height="xxx"', 'width="xxx"', "auto_play=false");
 	$replace = array('height="'.$HEIGHT.'"', 'width="'.$WIDTH.'"', "auto_play=$AUTO_PLAY");
-	echo str_replace($search, $replace,	file_get_contents("http://api.justin.tv/api/channel/embed/$streamName?width=xxx&height=xxx"));
+	echo str_replace($search, $replace, file_get_contents("http://api.justin.tv/api/channel/embed/$streamName?width=xxx&height=xxx"));
 }
 
 /**
