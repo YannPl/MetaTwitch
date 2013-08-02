@@ -93,7 +93,7 @@ function isOnline($streamName){
 	if(!isset($LIST_RESULT[$streamName])){
 		getStreamDetail($streamName);
 	}
-	return !empty($LIST_RESULT[$streamName]);
+	return !empty($LIST_RESULT[$streamName]["stream"]["viewers"]);
 }
 
 /**
@@ -102,6 +102,6 @@ function isOnline($streamName){
  */
 function getStreamDetail($streamName){
 	global $LIST_RESULT;
-	$LIST_RESULT[$streamName] = json_decode(file_get_contents("http://api.justin.tv/api/stream/list.json?channel=$streamName", 0, null, null), true);
+	$LIST_RESULT[$streamName] = json_decode(file_get_contents("https://api.twitch.tv/kraken/streams/$streamName", 0, null, null), true);
 }
 ?>
