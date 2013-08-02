@@ -77,9 +77,7 @@ function displayMainStreamIfEnabled(){
  */
 function displayStream($streamName){
 	global $HEIGHT, $WIDTH, $AUTO_PLAY;
-	$search = array('height="xxx"', 'width="xxx"', "auto_play=false");
-	$replace = array('height="'.$HEIGHT.'"', 'width="'.$WIDTH.'"', "auto_play=$AUTO_PLAY");
-	echo str_replace($search, $replace, file_get_contents("http://api.justin.tv/api/channel/embed/$streamName?width=xxx&height=xxx"));
+	echo '<object type="application/x-shockwave-flash" height="'.$HEIGHT.'" width="'.$WIDTH.'" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel='.$streamName.'" bgcolor="#000000"><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel='.$streamName.'&auto_play='.$AUTO_PLAY.'&start_volume=25" /></object>';
 }
 
 /**
